@@ -1,0 +1,103 @@
+package coleccionesEjerc07;
+import java.util.List;
+
+import leer.*;
+public class Gestion {
+
+    /**
+     * Muestra el menú principal de las opciones de la aplicación
+     */
+    public void mostrarMenu(){
+        System.out.println("n------nElija la opción que desea: n"
+                + "1.- Añadir extraterrestre a la base de datos  n"
+                + "2.- Mostrar todod por nacionalidad  n"
+                + "3.- Mostrar por planeta n"
+                + "4.- Modificar un humano  n"
+                + "5.- Borrar extraterrestre / eliminar  n"
+                + "OTRO NÚMERO --> Salir");
+    }
+
+    /**
+     * Muestra menú secundario perteneciente a la utilidad de edición de registros (Alumnos)
+     * @return  Devuelve entero válido con la opción seleccionada
+     */
+    public int menuEditar(){
+        int eleccion = 0;
+        do {
+            System.out.println("n------nElija que desea editar: n"
+                    + "t1.- Nombre n"
+                    + "t2.- Apellidos n"
+                    + "t3.- Edad n");
+
+            eleccion = Leer.datoInt();
+
+        } while (eleccion < 0 || eleccion > 3);
+        return eleccion;
+    }
+
+    /**
+     * Añadir nuevos registros
+     */
+    public Alumno anadirEx(){
+        System.out.println("Introduzca nombre");    String nom  =   Leer.dato();
+        System.out.println("Introduzca apellidos"); String ape  =   Leer.dato();
+        System.out.println("Introduzca edad");      int edad    =   Leer.datoInt();
+
+        Extra Ex = new Ex(nom, ape, edad);
+
+        return alum;
+    }
+
+  
+    public boolean noVacio(List<Ex> listaEx, int posicioneEx){
+        boolean existeElemento = false;
+        if (listaEx.size() < posicionEx)   existeElemento = true;
+
+        return existeElemento;
+    }
+
+ 
+    public Ex obtenerEx(List<Ex> listaEx, int posicionEx){
+        //Llamada al método booleano "noVacio". Si no es válida la posición, no se continua
+        while (this.noVacio(listaEx, posicionEx)) {
+            System.out.println("La posición elegida no existe. nPor favor, introduzca otra");
+            //Se solicita nueva posición
+            posicionEx = Leer.datoInt();
+        }
+        //Devuelve el objeto alumno
+        return listaEx.get(posicionEx-1);
+    }
+
+    public void eliminarEx(List<Ex> listaEx, int posicionEx){
+        //Llamada al método "obtenerextraterrestre" (recuerdo, este método ya se encarga de obtener una posición válida)
+       
+        listaEx.remove(this.obtenerEx(listaEx, posicionEx));
+
+        System.out.println("Registro eliminado correctamente");
+    }
+
+   
+    public void modificarEx(List<Ex> listaEx, int posicionEx){
+        //Llamada al método "obtenerextraterrestre" (recuerdo, este método ya se encarga de obtener una posición válida)
+        this.obtenerAlumno(listaEx, posicionEx);
+
+        //Se presenta el menú de edición. Posibilita: Editar nombre, apellidos y edad.
+        //Se modifica con los "set" creados en la clase "extraterrestre"
+        switch (this.menuEditar()) {
+            case 1://Se modifica el nombre
+                System.out.println("Introduzca el nuevo nombre");
+                this.obtenerEx(listaEx, posicionEx).setNombre(Leer.dato());
+                break;
+            case 2://Se modifican los apellidos
+                System.out.println("Introduzca los nuevos apellidos");
+                this.obtenerEx(listaEx, posicionEx).setApellidos(Leer.dato());
+                break;
+            case 3://Se modifica la edad
+                System.out.println("Introduzca la nueva edad");
+                this.obtenerAlumno(listaEx, posicionEx).setEdad(Leer.datoInt());
+                break;
+            default://No es necesaria esta opción
+                break;
+        } System.out.println("Modificación realizada correctamente");
+    }
+}

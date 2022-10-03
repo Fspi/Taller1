@@ -1,0 +1,87 @@
+package coleccionesEjerc07;
+import java.util.*;
+
+import leer.*;
+public class Test {
+
+    public static void main(String[] args) {
+
+        System.out.println("Bienvenido al programa ADMINISTRADOR DE extraterrestres n"
+                + "El programa permite: n"
+                + "tA.- Registrar los extraterrestres n"
+                + "tB.- Mostrar todos los extraterrestres n"
+                + "tC.- Mostrar un extraterrestre n"
+                + "tD.- Modificar un extraterrestre n"
+                + "tE.- Borrar un extraterrestre n-------nn");
+
+        boolean repetir = true;
+        int cantidadExInicial=0, posicionEx=0;
+        int aux = 1;
+
+        Gestion gestion = new Gestion();
+        System.out.println("¿Con cuántos extraterrestres desea iniciar el programa?");
+        cantidadExInicial = Leer.datoInt();
+        List<Ex> listaEx = new ArrayList<Ex>(cantidadExInicial);
+
+        for (int i = 0; i < cantidadExInicial; i++) {
+            listaEx.add(gestion.anadirEx());
+        }
+
+        do {
+            gestion.mostrarMenu();
+            switch (Leer.datoInt()) {
+                case 1: //Añadir
+                    listaEx.add(gestion.anadirEx());
+                    break;
+
+                case 2: //Mostrar todos los alumnos
+                    for (Alumno Ex : listaEx) {
+                        System.out.println(alumno.toString());
+                        System.out.println("------");
+                    }
+                    break;
+
+                case 3: 
+                    System.out.println("¿Qué alumno desea mostrar?");
+                    aux = 1;
+                    for (Ex  Ex : listaEx) {
+                        System.out.println(aux+ ".- " +Ex.getNombre());
+                        aux++;
+                    }
+                    posicionEx = Leer.datoInt();
+                    System.out.println(gestion.obtenerEx(listaEx, posicionEx));
+                    break;
+
+                case 4: 
+                    System.out.println("¿Qué extraterrestre desea modificar?");
+                    aux = 1;
+                    for (Ex Ex : listaEx) {
+                        System.out.println(aux+ ".- " + Ex.getNombre());
+                        aux++;
+                    }
+                    posicionEx = Leer.datoInt();
+                    gestion.modificarEx(listaEx, posicionEx);
+                    break;
+
+                case 5: //Eliminar 
+                    System.out.println("¿Qué extraterrestre desea eliminar?");
+                    aux = 1;
+                    for (Ex Ex : listaAlumnos) {
+                        System.out.println(aux+ ".- " + Ex.getNombre());
+                        aux++;
+                    }
+                    posicionEx = Leer.datoInt();
+                    gestion.eliminarEx(listaEx, posicionEx);
+                    break;
+
+                default: //Salir
+                    repetir = false;
+                    break;
+            }
+
+        } while (repetir);
+
+        System.out.println("---- Gracias por usar la aplicación ----");
+    }
+
+}
